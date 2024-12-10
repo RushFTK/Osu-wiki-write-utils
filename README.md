@@ -8,7 +8,7 @@ This repo mainly use [Ossapi](https://github.com/tybug/ossapi) by [tybug](https:
 
 1. Go OAuth in [osu! website settings](https://osu.ppy.sh/home/account/edit)
 
-2. Create an OAuth application or using a exist one, copy Client ID and Client secret.
+2. Create an OAuth application or using an exist one, copy Client ID and Client secret.
 
 3. Paste to `utils/common.py`
 
