@@ -64,6 +64,8 @@ class wikiColumn:
             content = ''
         else:
             content = self.cover_user_string(self[key]) if self.usercolumn else self.body[key]
+        if len(content) and self.bold:
+            content = f'**{content}**'
         return result + ' ' + content + ' |'
 
     def cover_user_string(self,user_string,split_char = ","):
@@ -74,7 +76,9 @@ class wikiColumn:
             split_user_string.sort()
             result = ''
             for i in range(0,len(split_user_string)):
-                result += str(osuWikiUser(split_user_string[i]))
+                user = osuWikiUser(split_user_string[i])
+                print(f'get osu user "{user.uname}" success.')
+                result += str(user)
                 if i < len(split_user_string) - 1:
                     result += ', '
         return result

@@ -6,7 +6,6 @@ client_secret = None
 
 def generate_osu_api():
     try:
-        Ossapi(client_id, client_secret)
         api_obj = Ossapi(client_id, client_secret)
     except AttributeError:
         print('please fill client_id / secret in utils/common.py before using\n'
