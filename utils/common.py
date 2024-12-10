@@ -7,7 +7,9 @@ client_secret = None
 def generate_osu_api():
     try:
         Ossapi(client_id, client_secret)
+        api_obj = Ossapi(client_id, client_secret)
     except AttributeError:
         print('please fill client_id / secret in utils/common.py before using\n'
             + 'You can find on osu!web settings (https://osu.ppy.sh/home/account/edit)')
-    return None
+        api_obj = None
+    return api_obj
