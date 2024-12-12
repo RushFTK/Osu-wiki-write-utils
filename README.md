@@ -16,11 +16,25 @@ This repo mainly use [Ossapi](https://github.com/tybug/ossapi) by [tybug](https:
 
 ### Usage
 
+![](image/wiki_table.png)
+
 1. Filling sheets in `data\wiki_table.xlsx`.
 
 2. Run `Table_generator.py`.
 
 3. Go `output\wiki_table.txt` to see the result.
+
+## Beatmaplist generator
+
+![](image/beatmap_list.png)
+
+### Usage
+
+1. Filling sheets in `data\beatmap_list.xlsx`.
+
+2. Run `Beatmaplist_generator.py`.
+
+3. Go `output\beatmap_list.txt` to see the result.
 
 Feel free to use [issues](https://github.com/RushFTK/Osu-wiki-write-utils/issues) page if anything feedback or improvement! ^^
 
