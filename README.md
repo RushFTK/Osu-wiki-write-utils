@@ -1,8 +1,9 @@
 # Osu-wiki-write-utils
 This repo contains some tools to generate some parts for osu wiki, contain following tools:
 - Table generator
-- Beatmap list generator (WIP)
-This repo mainly use [Ossapi](https://github.com/tybug/ossapi) by [tybug](https://github.com/tybug).
+- Beatmap list generator
+
+This repo mainly use [Ossapi](https://github.com/tybug/ossapi) by [tybug](https://github.com/tybug)，thanks you! 
 
 ## Setting API token
 
