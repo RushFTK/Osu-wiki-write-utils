@@ -16,7 +16,8 @@ def generate_osu_api():
 def convert_char(target:str):
     convert_list = {
         '[' : '\[',
-        ']' : '\]'
+        ']' : '\]',
+        '*' : '\*'
     }
     for target_char in convert_list.keys():
         target = target.replace(target_char,convert_list[target_char])
