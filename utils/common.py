@@ -12,3 +12,12 @@ def generate_osu_api():
             + 'You can find on osu!web settings (https://osu.ppy.sh/home/account/edit)')
         api_obj = None
     return api_obj
+
+def convert_char(target:str):
+    convert_list = {
+        '[' : '\[',
+        ']' : '\]'
+    }
+    for target_char in convert_list.keys():
+        target = target.replace(target_char,convert_list[target_char])
+    return target
