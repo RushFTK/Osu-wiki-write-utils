@@ -11,7 +11,7 @@ This repo mainly use [Ossapi](https://github.com/tybug/ossapi) by [tybug](https:
 
 2. Create an OAuth application or using an exist one, copy Client ID and Client secret.
 
-3. Paste to `utils/common.py`
+3. Paste to `.env`, don't forgot using `""` to contain string, like `"14015"`
 
 ## Table generator
 

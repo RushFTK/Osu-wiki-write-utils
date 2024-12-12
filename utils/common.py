@@ -1,11 +1,12 @@
+import os
 from ossapi import Ossapi
-
-# don't fotgot add '' to contain client_id and secret, e.g:None
-client_id = None
-client_secret = None
+from dotenv import load_dotenv, dotenv_values
 
 def generate_osu_api():
     try:
+        load_dotenv()
+        client_id = os.getenv("client_id")
+        client_secret = os.getenv("client_secret")
         api_obj = Ossapi(client_id, client_secret)
     except AttributeError:
         print('please fill client_id / secret in utils/common.py before using\n'
