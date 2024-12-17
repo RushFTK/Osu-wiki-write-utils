@@ -25,7 +25,7 @@ class osuWikiUser:
         return user_part + link_part
 
     def __str__(self):
-        flag_part = '::{ flag='+self.flagcode+' }::' if self.flagcode != '' else ''
+        flag_part = '::{ flag='+self.flagcode+' }:: ' if self.flagcode != '' else ''
         user_part = '['+self.uname+']' if self.uname != '' else ''
         link_part = '(https://osu.ppy.sh/users/'+str(self.uid)+')' if self.uid != 0 else ''
         return flag_part + user_part + link_part

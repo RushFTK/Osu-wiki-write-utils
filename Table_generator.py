@@ -73,11 +73,16 @@ class wikiColumn:
             return '*TBA*'
         else:
             split_user_string = user_string.split(split_char)
-            split_user_string.sort()
+            split_user_string.sort(key=lambda x: x.lower())
             result = ''
             for i in range(0,len(split_user_string)):
-                user = osuWikiUser(split_user_string[i])
-                print(f'get osu user "{user.uname}" success.')
+                try:
+                    user = osuWikiUser(split_user_string[i])
+                    print(f'get osu user "{user.uname}" success.')
+                except ValueError as e:
+                    print('unable to find player name' + user.uname + 'details below')
+                    print(e)
+                    continue
                 result += str(user)
                 if i < len(split_user_string) - 1:
                     result += ', '
