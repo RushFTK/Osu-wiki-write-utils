@@ -1,4 +1,5 @@
 from utils.common import generate_osu_api
+from utils.common import convert_char
 osu_api = generate_osu_api()
 
 class osuWikiUser:
@@ -11,13 +12,13 @@ class osuWikiUser:
         self.uname = uname
         self.flagcode = flagcode
 
-    def __init__(self,uid:int):
-        self.uid = uid
-        self.update_info_by_uid(uid)
-
-    def __init__(self,uname:str):
-        self.uname = uname
-        self.update_info_by_name(uname)
+    def __init__(self,user,is_uid=False):
+        if (is_uid):
+            self.uid = user
+            self.update_info_by_uid(user)
+        else:
+            self.uname = user
+            self.update_info_by_name(user)
 
     def __repr__(self):
         user_part = self.uname if self.uname != '' else '-'
@@ -40,7 +41,7 @@ class osuWikiUser:
             pass
         user = osu_api.user(uid,key='id')
         self.flagcode = user.country_code
-        self.uname = user.username
+        self.uname = convert_char(user.username)
 
     def update_info_by_name(self,uname:str):
         if uname is None and self.uname != '':
@@ -50,3 +51,4 @@ class osuWikiUser:
         user = osu_api.user(uname,key='username')
         self.flagcode = user.country_code
         self.uid = user.id
+        self.uname = convert_char(self.uname)

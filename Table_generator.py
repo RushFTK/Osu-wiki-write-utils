@@ -26,7 +26,8 @@ class wikiColumn:
     head = ''
     align = tableAlign.left
     bold = False
-    usercolumn = False
+    user_column = False
+    using_UID = False
 
     def __init__(self):
         self.body = []
@@ -63,12 +64,12 @@ class wikiColumn:
         if key >= len(self):
             content = ''
         else:
-            content = self.cover_user_string(self[key]) if self.usercolumn else self.body[key]
+            content = self.cover_user_string(self[key],is_uid=self.using_UID) if self.user_column else self.body[key]
         if len(content) and self.bold:
             content = f'**{content}**'
         return result + ' ' + content + ' |'
 
-    def cover_user_string(self,user_string,split_char = ","):
+    def cover_user_string(self,user_string,split_char = ",",is_uid = False):
         if len(user_string) == 0:
             return '*TBA*'
         else:
@@ -77,7 +78,10 @@ class wikiColumn:
             result = ''
             for i in range(0,len(split_user_string)):
                 try:
-                    user = osuWikiUser(split_user_string[i])
+                    if (is_uid):
+                        user = osuWikiUser(split_user_string[i],is_uid=True)
+                    else:
+                        user = osuWikiUser(split_user_string[i])
                     print(f'get osu user "{user.uname}" success.')
                 except ValueError as e:
                     print('unable to find player name' + user.uname + 'details below')
@@ -139,17 +143,20 @@ class wikiTable:
             bold_text = ws.cell(row=3, column=column_index).value
             current_column.bold = True if bold_text == '√' else False
             user_column_text = ws.cell(row=4, column=column_index).value
-            current_column.usercolumn = True if user_column_text == '√' else False
+            current_column.user_column = True if user_column_text == '√' else False
+            using_UID_text = ws.cell(row=5, column=column_index).value
+            current_column.using_UID = True if using_UID_text == '√' else False
+
 
             empty_head = False
-            head_text = ws.cell(row=5, column=column_index).value
+            head_text = ws.cell(row=6, column=column_index).value
             if head_text is None:
                 empty_head = True
                 head_text = ''
             current_column.head = head_text
 
             empty_body = True
-            for cur_row_index in range(6,m_row+1):
+            for cur_row_index in range(7,m_row+1):
                 body_text = ws.cell(row=cur_row_index, column=column_index).value
                 if body_text is None:
                     body_text = ''
@@ -157,7 +164,7 @@ class wikiTable:
                     if not isinstance(body_text, str):
                         body_text = str(body_text)
                     empty_body = False
-                    self.max_body_row = cur_row_index-5
+                    self.max_body_row = cur_row_index-6
                 current_column += body_text
 
             if empty_head and empty_body:
