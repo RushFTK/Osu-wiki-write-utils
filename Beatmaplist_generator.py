@@ -1,5 +1,3 @@
-from dis import UNKNOWN
-
 from openpyxl import load_workbook
 from utils.common import generate_osu_api
 from utils.common import convert_char
@@ -21,7 +19,7 @@ class wikiBeatmaps:
             self.set_beatmap_by_id(bid)
 
     def __str__(self):
-        display_name = f'{self.artist} - {self.title} ({self.mapper})[{self.difficult_name}]'
+        display_name = f'{self.artist} - {self.title} ({self.mapper}) [{self.difficult_name}]'
         url = f'https://osu.ppy.sh/beatmapsets/{self.sid}#{self.mode.value}/{self.bid}'
         return f'[{convert_char(display_name)}]({url})'
 
@@ -35,7 +33,12 @@ class wikiBeatmaps:
             self.mode = beatmap.mode
             self.artist = beatmapset.artist
             self.title = beatmapset.title
-            self.mapper = beatmapset.creator
+            mapper_string = ''
+            for index in range(0, len(beatmap.owners)):
+                mapper_string += beatmap.owners[index].username
+                if index != len(beatmap.owners) - 1:
+                    mapper_string += ", "
+            self.mapper = mapper_string
             self.difficult_name = beatmap.version
             cleantags = ['[4K] ', '[7K] ']
             for cleantag in cleantags:
@@ -56,6 +59,7 @@ class wikiBeatmapLists:
         'HB' : 'Hybrid',
         'LN' : 'Long Note',
         'SV' : 'SV',
+        'EX' : 'Extreme',
         'TB' : 'Tiebreaker'
     }
 
@@ -100,7 +104,10 @@ class wikiBeatmapLists:
             result += f'- {mod}\n'
             beatmaps = self.maplist[mod]
             for i in range(0, len(beatmaps)):
-                result += f'  {i+1}. {beatmaps[i]}\n'
+                result_item =f'{beatmaps[i]}'
+                if mod == 'Tiebreaker':
+                    result_item = '**'+result_item+'**'
+                result += f'  {i+1}. {result_item}\n'
         return result
 
     def output_list(self):

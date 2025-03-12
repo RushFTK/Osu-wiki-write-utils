@@ -20,7 +20,8 @@ def convert_char(target:str):
         ']' : '\]',
         '*' : '\*',
         '_' : '\_',
-        '~' : '\~'
+        '~' : '\~',
+        ':' : '\:'
     }
     for target_char in convert_list.keys():
         target = target.replace(target_char,convert_list[target_char])
